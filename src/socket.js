@@ -1,4 +1,5 @@
 const {Server} = require('socket.io');
+const {getData} = require('./services.js');
 let io;
 
 
@@ -19,7 +20,16 @@ function initialSocket(httpServer) {
           console.log(`Disconnected: ${socket.id}`);
         });
 
-        
+      // pongo a escuchar evento "JOIN" donde se le pasa los tados.
+      socket.on('join',async ()=>{
+        const data = await getData();
+        socket.emit('data',data);
+      });  
+
+    
+
+
+
 // fin io.on
     });
 
