@@ -6,7 +6,7 @@ module.exports=(sequelize)=>{
             primaryKey:true,
             autoIncrement:true,
         },
-        name:{
+        hora:{
             type:DataTypes.STRING,
         },
         data:{
