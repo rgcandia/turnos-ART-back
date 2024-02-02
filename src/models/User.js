@@ -9,8 +9,8 @@ module.exports=(sequelize)=>{
         name:{
             type:DataTypes.STRING,
         },
-        description:{
-            type:DataTypes.STRING,
+        turno:{
+            type:DataTypes.INTEGER,
         },
         email:{
             type:DataTypes.STRING,
