@@ -120,7 +120,7 @@ const nombres = [
         nombres.map(nombre => ({ name: nombre })),
       );
       await horario.bulkCreate(
-        horarios.map(hora => ({ hora })),
+        horarios.map(hora => ({ hora,data:[] })),
       );
   
       console.log('Registros creados con éxito');

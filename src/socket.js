@@ -26,11 +26,8 @@ function initialSocket(httpServer) {
         socket.emit('data',data);
       });  
 
-     // escucho uploadData
-     socket.on('updateData',async ({horario,user})=>{
-      
-      console.log(parseInt(user,10))
-     })
+    
+
 
 
 
