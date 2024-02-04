@@ -1,5 +1,5 @@
 const {Server} = require('socket.io');
-const {getData} = require('./services.js');
+const {getData, obtenerDataPorIdHorario,actualizarDataEnHorario,actualizarTurnoDeUsuario} = require('./services.js');
 let io;
 
 
@@ -26,7 +26,13 @@ function initialSocket(httpServer) {
         socket.emit('data',data);
       });  
 
-    
+      socket.on('updateData',async ({horario,user})=>{
+   
+       const dataHorario = await obtenerDataPorIdHorario(horario)
+       dataHorario.push(user)
+       await actualizarDataEnHorario(horario,dataHorario);
+       await actualizarTurnoDeUsuario(user,horario)   
+      });
 
 
 

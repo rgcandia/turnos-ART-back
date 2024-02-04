@@ -111,6 +111,7 @@ const nombres = [
   ];
 
   const startModels = async (conn, user,horario) => {
+    console.log("llega acá")
     try {
       // Sincroniza el modelo con la base de datos (crea la tabla si no existe)
       await conn.sync({ force: true });
@@ -122,7 +123,7 @@ const nombres = [
       await horario.bulkCreate(
         horarios.map(hora => ({ hora,data:[] })),
       );
-  
+        
       console.log('Registros creados con éxito');
     } catch (error) {
       console.error('Error al crear registros:', error);
