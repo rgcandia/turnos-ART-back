@@ -58,4 +58,6 @@ async function actualizarTurnoDeUsuario(idUsuario, nuevoTurno) {
         throw error;
     }
 }
+
+
 module.exports = { getData, obtenerDataPorIdHorario,actualizarDataEnHorario ,actualizarTurnoDeUsuario};

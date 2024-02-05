@@ -31,9 +31,28 @@ function initialSocket(httpServer) {
        const dataHorario = await obtenerDataPorIdHorario(horario)
        dataHorario.push(user)
        await actualizarDataEnHorario(horario,dataHorario);
-       await actualizarTurnoDeUsuario(user,horario)   
+       await actualizarTurnoDeUsuario(user,horario)  
+       // se envía la data actualizada a todos los conectados
+
+       const data = await getData();
+       io.emit('data',data);
+
+
       });
 
+      // Esucho el evento eliminar reserva
+    socket.on('eliminarReserva',async ({userId,horarioId})=>{
+       // coloco en null el campo turno en el usuario
+        await actualizarTurnoDeUsuario(userId,null)  
+        //elimino el usuario en el array data del horario especificado
+        const dataHorario = await obtenerDataPorIdHorario(horarioId)
+        const newData = dataHorario.filter(e=>e !== userId)
+        await actualizarDataEnHorario(horarioId,newData);
+        //actualizo enviando a todos los conectado 
+        const data = await getData();
+        io.emit('data',data);
+
+    })
 
 
 
