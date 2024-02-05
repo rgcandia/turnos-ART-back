@@ -29,13 +29,17 @@ function initialSocket(httpServer) {
       socket.on('updateData',async ({horario,user})=>{
    
        const dataHorario = await obtenerDataPorIdHorario(horario)
-       dataHorario.push(user)
-       await actualizarDataEnHorario(horario,dataHorario);
-       await actualizarTurnoDeUsuario(user,horario)  
-       // se envía la data actualizada a todos los conectados
 
-       const data = await getData();
-       io.emit('data',data);
+      if(dataHorario.length<4){
+        dataHorario.push(user)
+        await actualizarDataEnHorario(horario,dataHorario);
+        await actualizarTurnoDeUsuario(user,horario)  
+        // se envía la data actualizada a todos los conectados
+        const data = await getData();
+        io.emit('data',data);
+      }else{
+        socket.emit('alert',{error:'Lo sentimos, los turnos para el horario seleccionado están ocupados'})
+      }
 
 
       });
