@@ -1,4 +1,4 @@
-const {Server} = require('socket.io');
+const {Server, Socket} = require('socket.io');
 const {getData, obtenerDataPorIdHorario,actualizarDataEnHorario,actualizarTurnoDeUsuario} = require('./services.js');
 let io;
 
@@ -37,6 +37,7 @@ function initialSocket(httpServer) {
         // se envía la data actualizada a todos los conectados
         const data = await getData();
         io.emit('data',data);
+        socket.emit('alert',{success:'Registro Correcto !'})
       }else{
         socket.emit('alert',{error:'Lo sentimos, los turnos para el horario seleccionado están ocupados'})
       }
@@ -55,7 +56,7 @@ function initialSocket(httpServer) {
         //actualizo enviando a todos los conectado 
         const data = await getData();
         io.emit('data',data);
-
+        socket.emit('alert',{eliminado:'Se ha eliminado correctamente'})
     })
 
 
