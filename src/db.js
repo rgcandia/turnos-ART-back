@@ -4,17 +4,19 @@ const fs = require('fs');
 const path = require('path');
 const basename = path.basename(__filename);
 const modelDefiners = [];
-const {POSTGRES_DATABASE,POSTGRES_PASSWORD,POSTGRES_HOST,POSTGRES_USER} = process.env;
-
+const {POSTGRES_DATABASE,POSTGRES_PASSWORD,POSTGRES_HOST,POSTGRES_USER,POSTGRES_PORT} = process.env;
 const sequelize = new Sequelize(POSTGRES_DATABASE, POSTGRES_USER, POSTGRES_PASSWORD, {
   host: POSTGRES_HOST,
+  port: POSTGRES_PORT || 5432,  // Neon usa siempre el puerto 5432
   dialect: 'postgres',
-  dialectModule:require('pg'),
+  dialectModule: require('pg'),
   dialectOptions: {
     ssl: {
       require: true,
+      rejectUnauthorized: false, // 🔹 Necesario en Neon
     },
   },
+  logging: false, // 🔹 Desactiva logs de Sequelize (puedes activarlo con `console.log`)
 });
 
 // SOLO HABILITAR CUANDO SE CREEN MODELOS
