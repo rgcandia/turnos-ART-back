@@ -15,6 +15,8 @@ const sequelize = new Sequelize(POSTGRES_DATABASE, POSTGRES_USER, POSTGRES_PASSW
       require: true,
       rejectUnauthorized: false, // 🔹 Necesario en Neon
     },
+    // Agrega esto si usas la URL de "Pooler" (puerto 5432 o 6543)
+    prepareThreshold: 0,
   },
   logging: false, // 🔹 Desactiva logs de Sequelize (puedes activarlo con `console.log`)
 });
