@@ -6,7 +6,7 @@ const {PORT} = process.env;
 //config init
 
 conn.sync().then(()=>{
-    startModels(conn,User,Horario);    
+   // startModels(conn,User,Horario);    
     console.log('db sincronizada')
     server.listen(PORT,()=>{
         console.log('Servidor Listo en puerto : '+PORT)
