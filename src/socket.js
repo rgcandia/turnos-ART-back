@@ -30,7 +30,7 @@ function initialSocket(httpServer) {
    
        const dataHorario = await obtenerDataPorIdHorario(horario)
 
-      if(dataHorario.length<6){
+      if(dataHorario.length<7){
         dataHorario.push(user)
         await actualizarDataEnHorario(horario,dataHorario);
         await actualizarTurnoDeUsuario(user,horario)  
