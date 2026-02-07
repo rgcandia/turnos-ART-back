@@ -22,6 +22,7 @@ function initialSocket(httpServer) {
 
       // pongo a escuchar evento "JOIN" donde se le pasa los tados.
       socket.on('join',async ()=>{
+        console.log("llego acá")
         const data = await getData();
         socket.emit('data',data);
       });  

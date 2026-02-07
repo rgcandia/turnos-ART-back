@@ -4,6 +4,7 @@ async function getData(){
     try {
         const users = await User.findAll();
         const horarios = await Horario.findAll();
+        console.log(horarios)
         return {users, horarios}
      } catch (error) {
         console.error('Error al obtener usuarios:', error);
